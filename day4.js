@@ -1175,5 +1175,5 @@ function checkPassportsDetailed() {
 }
 checkPassportsDetailed();
 
-console.log(numValidPassportsPart2); // 155 wrong 161 too high
+console.log(numValidPassportsPart2); // 160
 
