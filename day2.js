@@ -1011,10 +1011,9 @@ let input = `6-7 w: wwhmzwtwwk
 1-18 c: ccdczcvccvclcccvkccb`;
 
 
-let inputs = input.split("\n");
-let splitPasswords = inputs.map(input => input.split(" "));
+let splitPasswords = input.split("\n").map(input => input.split(" "));
 
-function createUsablePassword() {
+function part1() {
   for (let i = 0; i < splitPasswords.length; i++) {
     // split "1-18" into ["1", "18"]
     splitPasswords[i][0] = splitPasswords[i][0].split("-");
@@ -1024,12 +1023,8 @@ function createUsablePassword() {
     // remove the colon after the middle letter
     splitPasswords[i][1] = splitPasswords[i][1][0];
   }
-}
-createUsablePassword();
+  let numValidPasswords = 0;
 
-let numValidPasswords = 0;
-
-function isPasswordValid() {
   splitPasswords.map(password => {
     // password looks like [[1, 18], c, ccdczcvccvclcccvkccb]
     // split the password by character, filter it to only contain the target character, then rejoin it
@@ -1037,10 +1032,9 @@ function isPasswordValid() {
     // if its length is within the desired range in password[0], add 1 to numValidPasswords
     if (singleCharPassword.length >= password[0][0] && singleCharPassword.length <= password[0][1]) numValidPasswords++;
   })
+  return numValidPasswords;
 }
-isPasswordValid();
-
-console.log(numValidPasswords); // 477
+console.log(part1()); // 477
 
 // --- Part Two ---
 // While it appears you validated the passwords correctly, they don't seem to be what the Official Toboggan Corporate Authentication System is expecting.
@@ -1053,17 +1047,15 @@ console.log(numValidPasswords); // 477
 //     2-9 c: ccccccccc is invalid: both position 2 and position 9 contain c.
 // How many passwords are valid according to the new interpretation of the policies?
 
-let numValidPasswordsPart2 = 0;
 
-function isPasswordValidPart2() {
+function part2() {
+  let numValidPasswords = 0;
   splitPasswords.map(password => {
-    // password looks like [[1, 18], c, ccdczcvccvclcccvkccb]
     // firstPos and secondPos make the code more readable, and minus 1 because the Toboggan Policies don't use zero indexing
     let firstPos = password[0][0] - 1;
     let secondPos = password[0][1] -1;
-    if (password[2][firstPos] === password[1] && password[2][secondPos] !== password[1] || password[2][firstPos] !== password[1] && password[2][secondPos] === password[1]) numValidPasswordsPart2++;
+    if (password[2][firstPos] === password[1] && password[2][secondPos] !== password[1] || password[2][firstPos] !== password[1] && password[2][secondPos] === password[1]) numValidPasswords++;
   })
+  return numValidPasswords;
 }
-isPasswordValidPart2();
-
-console.log(numValidPasswordsPart2);  // 686
+console.log(part2()); // 686
