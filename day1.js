@@ -205,7 +205,7 @@ let input = `1895
 let inputArr = input.split("\n");
 let inputExpenses = inputArr.map(input => parseInt(input));
 
-function find2020() {
+function part1() {
   for (let i = 0; i < inputExpenses.length; i++) {
     for (let j = 0; j < inputExpenses.length; j++) {
       if (i !== j && inputExpenses[i] + inputExpenses[j] === 2020) {
@@ -214,13 +214,13 @@ function find2020() {
     }
   }
 }
-console.log(find2020());  // 987339
+console.log(part1());  // 987339
 
 // --- Part Two ---
 // Using the above example again, the three entries that sum to 2020 are 979, 366, and 675. Multiplying them together produces the answer, 241861950.
 // In your expense report, what is the product of the three entries that sum to 2020?
 
-function find2020Part2() {
+function part2() {
   for (let i = 0; i < inputExpenses.length; i++) {
     for (let j = 0; j < inputExpenses.length; j++) {
       for (let k = 0; k < inputExpenses.length; k++) {
@@ -231,4 +231,4 @@ function find2020Part2() {
     }
   }
 }
-console.log(find2020Part2()); // 259521570
+console.log(part2()); // 259521570
