@@ -333,12 +333,11 @@ let input = `.##.#.........#.....#....#...#.
 ..###........#......#.#........
 ..#.##.#....#.#....#.#...#.....`
 
-let numTrees = 0;
-let rows = input.split("\n"); // 323 rows
-let rowLength = rows[0].length; // 31
-
-// count trees checks whether the current target is a #, then adds one to the row number, and 3 to the countPosition on each iteration
-function countTrees() {
+// checks whether the current target is a #, then adds one to the row number, and 3 to the countPosition on each iteration
+function part1() {
+  let numTrees = 0;
+  let rows = input.split("\n"); // 323 rows
+  let rowLength = rows[0].length; // 31
   let countPosition = 0;
   let row = 0;
 
@@ -352,10 +351,9 @@ function countTrees() {
       countPosition = countPosition - rowLength + 3;
     }
   }
+  return numTrees;
 }
-countTrees();
-
-console.log(numTrees);  // 284
+console.log(part1());  // 284
 
 
 // --- Part Two ---
@@ -377,11 +375,14 @@ let slopes = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]];
 slopes.forEach(slope => {
   // reset numTrees for each slope as totalTrees is multiplied by numTrees at the end of each countTrees iteration
   numTrees = 0;
-  countTreesPart2(slope[0], slope[1]);
+  part2(slope[0], slope[1]);
 });
 
 // count trees checks whether the current target is a #, then adds y to the row number, and x to the countPosition on each iteration
-function countTreesPart2(x, y) {
+function part2(x, y) {
+  let rows = input.split("\n"); // 323 rows
+  let rowLength = rows[0].length; // 31
+
   let countPosition = 0;
   let row = 0;
 
