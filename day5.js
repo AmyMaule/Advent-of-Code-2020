@@ -879,39 +879,39 @@ FBFFFFBRLL
 FBFFBFBLRL`;
 
 let boardingPasses = input.split("\n").map(pass => pass.split(""));
-
-// let splitPasses = testPasses.map(pass => pass.split(""));
+let seatIds = [];
 let highestSeatId = 0;
 let lowestSeatId = 1000;
-let seatIds = [];
 
-boardingPasses.map(pass => {
-  let start = 0;
-  let end = 127;
-  for (let i = 0; i < 8; i++) {
-    // round up halfway between start and end, minus the result from end
-    if (pass[i] === "F") {
-      end -= Math.ceil((end-start)/2);
-    } else if (pass[i] === "B") {
-      start += Math.ceil((end-start)/2);
+function part1() {
+  boardingPasses.map(pass => {
+    let start = 0;
+    let end = 127;
+    for (let i = 0; i < 8; i++) {
+      // round up halfway between start and end, minus the result from end
+      if (pass[i] === "F") {
+        end -= Math.ceil((end-start)/2);
+      } else if (pass[i] === "B") {
+        start += Math.ceil((end-start)/2);
+      }
     }
-  }
-  let left = 0;
-  let right = 7;
-  for (let i = 7; i < 11; i++) {
-    if (pass[i] === "L") {
-      right -= Math.ceil((right-left)/2);
-    } else if (pass[i] === "R") {
-      left += Math.ceil((right-left)/2);
+    let left = 0;
+    let right = 7;
+    for (let i = 7; i < 11; i++) {
+      if (pass[i] === "L") {
+        right -= Math.ceil((right-left)/2);
+      } else if (pass[i] === "R") {
+        left += Math.ceil((right-left)/2);
+      }
     }
-  }
-  let seatId = (start * 8) + left;
-  seatIds.push(seatId);
-  if (seatId > highestSeatId) highestSeatId = seatId;
-  if (seatId < lowestSeatId) lowestSeatId = seatId;
-})
-
-console.log(highestSeatId); // 919
+    let seatId = (start * 8) + left;
+    seatIds.push(seatId);
+    if (seatId > highestSeatId) highestSeatId = seatId;
+    if (seatId < lowestSeatId) lowestSeatId = seatId;
+  })
+  return highestSeatId;
+}
+console.log(part1()); // 919
 
 
 // --- Part Two ---
@@ -920,14 +920,14 @@ console.log(highestSeatId); // 919
 // Your seat wasn't at the very front or back, though; the seats with IDs +1 and -1 from yours will be in your list.
 // What is the ID of your seat?
 
-// console.log(lowestSeatId); // 80
-let mySeatId;
-
-seatIds.sort((a, b) => a - b);
-seatIds.forEach((seat, i) => {
-  // check either whichever seat doesn't have a previous consecutive neighbour or whichever doesn't have a next consecutive neighbour
-  if (seatIds[i-1] !== seat - 1 && seat !== lowestSeatId) mySeatId = seat - 1;
-  // if (seatIds[i+1] !== seat + 1 && seat !== highestSeatId) mySeatId = seat + 1;
-})
-
-console.log(mySeatId); // 642
+function part2() {
+  let mySeatId;
+  seatIds.sort((a, b) => a - b);
+  seatIds.forEach((seat, i) => {
+    // check either whichever seat doesn't have a previous consecutive neighbour or whichever doesn't have a next consecutive neighbour
+    if (seatIds[i-1] !== seat - 1 && seat !== lowestSeatId) mySeatId = seat - 1;
+    // if (seatIds[i+1] !== seat + 1 && seat !== highestSeatId) mySeatId = seat + 1;
+  })
+  return mySeatId;
+}
+console.log(part2()); // 642
