@@ -1115,9 +1115,8 @@ ecl:#ae12d3 hgt:74cm cid:239 hcl:z pid:345439730 iyr:1924 byr:2029 eyr:2031`
 // split the input into passports at double new lines, then use regex to split up each passport's properties by splitting at new lines and spaces
 let passports = input.split("\n\n").map(passport => passport.split(/[\n\s]/));
 
-let numValidPassports = 0;
-
-function checkPassports() {
+function part1() {
+  let numValidPassports = 0;
   passports.map(passport => {
     if (passport.length >= 7) {
       let passportFields = 0;
@@ -1127,10 +1126,9 @@ function checkPassports() {
       if (passportFields === 7) numValidPassports++;
     }
   })
+  return numValidPassports;
 }
-checkPassports();
-
-console.log(numValidPassports); // 226
+console.log(part1()); // 226
 
 // --- Part Two ---
 // You can continue to ignore the cid field, but each other field has strict rules about what values are valid for automatic validation:
@@ -1148,9 +1146,9 @@ console.log(numValidPassports); // 226
 
 // Your job is to count the passports where all required fields are both present and valid according to the above rules.
 
-let numValidPassportsPart2 = 0;
 
-function checkPassportsDetailed() {
+function part2() {
+  let numValidPassports = 0;
   passports.map(passport => {
     let passportFields = 0;
     if (passport.length >= 7) {
@@ -1170,10 +1168,9 @@ function checkPassportsDetailed() {
         if (field.match(/pid:([0-9]){9}/) && field.length === 13) passportFields++;
       })
     }
-    if (passportFields >= 7) numValidPassportsPart2++;
+    if (passportFields >= 7) numValidPassports++;
   })
+  return numValidPassports;
 }
-checkPassportsDetailed();
-
-console.log(numValidPassportsPart2); // 160
+console.log(part2()); // 160
 
