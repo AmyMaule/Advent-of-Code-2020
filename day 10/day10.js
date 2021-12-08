@@ -170,28 +170,6 @@ function part1() {
 }
 console.log(part1()); // 2232
 
-// --- Part Two ---
-
-// To completely determine whether you have enough adapters, you'll need to figure out how many different ways they can be arranged. Every arrangement needs to connect the charging outlet to your device. The previous rules about when adapters can successfully connect still apply.
-
-// The first example above (the one that starts with 16, 10, 15) supports the following arrangements:
-
-// (0), 1, 4, 5, 6, 7, 10, 11, 12, 15, 16, 19, (22)
-// (0), 1, 4, 5, 6, 7, 10, 12, 15, 16, 19, (22)
-// (0), 1, 4, 5, 7, 10, 11, 12, 15, 16, 19, (22)
-// (0), 1, 4, 5, 7, 10, 12, 15, 16, 19, (22)
-// (0), 1, 4, 6, 7, 10, 11, 12, 15, 16, 19, (22)
-// (0), 1, 4, 6, 7, 10, 12, 15, 16, 19, (22)
-// (0), 1, 4, 7, 10, 11, 12, 15, 16, 19, (22)
-// (0), 1, 4, 7, 10, 12, 15, 16, 19, (22)
-
-// (The charging outlet and your device's built-in adapter are shown in parentheses.) Given the adapters from the first example, the total number of arrangements that connect the charging outlet to your device is 8.
-
-// In total, the 2nd set of adapters can connect the charging outlet to your device in 19208 distinct arrangements.
-
-// What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your device?
-
-
 function part2() {
    // .concat(0) to add the 0 adapter and sort by ascending
   let adapters = input.split("\n").map(adapter => Number(adapter)).concat(0).sort((a, b) => a-b);
